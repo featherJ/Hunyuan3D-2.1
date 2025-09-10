@@ -150,7 +150,7 @@ class Predictor(BasePredictor):
         if image is not None:
             input_image = Image.open(str(image))
             if remove_background:
-                input_image = self.rmbg_worker(input_image.convert('RGB'))
+                input_image = self.rmbg_worker(input_image)
                 self._cleanup_gpu_memory()
         else:
             self._log_analytics_event("predict_error", {"error": "no_image_provided"})
