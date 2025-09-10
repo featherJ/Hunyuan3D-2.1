@@ -22,7 +22,7 @@ from cog import BasePredictor, BaseModel, Input, Path
 
 from hy3dshape import FaceReducer, FloaterRemover, DegenerateFaceRemover, Hunyuan3DDiTFlowMatchingPipeline
 from hy3dshape.pipelines import export_to_trimesh
-# from hy3dshape.rembg import BackgroundRemover
+#from hy3dshape.rembg import BackgroundRemover
 from hy3dshape.rmbg import RMBG
 from hy3dshape.utils import logger
 from hy3dpaint.textureGenPipeline import Hunyuan3DPaintPipeline, Hunyuan3DPaintConfig

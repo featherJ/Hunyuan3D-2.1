@@ -58,7 +58,7 @@ cupy-cuda12x==13.4.1
 # bpy==4.0 靠run来安装。。
 
 # 为了引入阿里的移除背景开源模型
-modelscope==1.15.0
+modelscope
 
 # ONNX Runtime
 onnxruntime==1.16.3
