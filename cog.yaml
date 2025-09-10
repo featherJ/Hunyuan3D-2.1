@@ -24,6 +24,6 @@ build:
     - mkdir -p /root/.u2net/ && curl -o /root/.u2net/u2net.onnx -L "https://github.com/danielgatis/rembg/releases/download/v0.0.0/u2net.onnx"
 
     # RMBG-2.0 模型缓存
-    - python3.10 -c "from modelscope.models import AutoModelForImageSegmentation; AutoModelForImageSegmentation.from_pretrained('AI-ModelScope/RMBG-2.0', trust_remote_code=True)"
+    - python3.10 -c "from modelscope import AutoModelForImageSegmentation; AutoModelForImageSegmentation.from_pretrained('AI-ModelScope/RMBG-2.0', trust_remote_code=True)"
 
 predict: "predict.py:Predictor"
