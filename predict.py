@@ -181,7 +181,7 @@ class Predictor(BasePredictor):
                 
                 textured_mesh_path = "output/textured_mesh.obj"
                 self.texgen_worker(mesh_path=temp_mesh_path, image_path=input_image, 
-                                 output_mesh_path=textured_mesh_path, save_glb=False)
+                                 output_mesh_path=textured_mesh_path, use_remesh=False, save_glb=False)
                 self._cleanup_gpu_memory()
                 
                 output_path = Path("output/textured_mesh.glb")
