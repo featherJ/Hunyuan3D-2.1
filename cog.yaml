@@ -5,8 +5,28 @@ build:
   python_version: "3.10"
   python_requirements: "requirements.txt"
   run:
-    - apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends libegl1-mesa-dev libglib2.0-0 libeigen3-dev libcgal-dev libxi6 libgconf-2-4 libxkbcommon-x11-0 libsm6 libxext6 libxrender-dev libglvnd0 libgl1 libglx0 libegl1 libgles2 libglvnd-dev libgl1-mesa-dev libegl1-mesa-dev libgles2-mesa-dev mesa-utils-extra libxrender1 && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-    - mkdir -p /root/.cache/hy3dpaint/ckpt && curl -o /root/.cache/hy3dpaint/ckpt/RealESRGAN_x4plus.pth -L "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.1.0/RealESRGAN_x4plus.pth"
-    - mkdir -p /root/.u2net/ && curl -o /root/.u2net/u2net.onnx -L "https://github.com/danielgatis/rembg/releases/download/v0.0.0/u2net.onnx"
+    # 安装系统依赖
+    - apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+      libegl1-mesa-dev libglib2.0-0 libeigen3-dev libcgal-dev libxi6 libgconf-2-4 libxkbcommon-x11-0 \
+      libsm6 libxext6 libxrender-dev libglvnd0 libgl1 libglx0 libegl1 libgles2 libglvnd-dev libgl1-mesa-dev \
+      libegl1-mesa-dev libgles2-mesa-dev mesa-utils-extra libxrender1 build-essential cmake \
+      python3.10-distutils python3.10-dev && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+    # 升级 pip 和安装基础 Python 工具
+    - python3.10 -m pip install --upgrade pip setuptools wheel
+
+    # 安装 PyTorch + CUDA
+    - python3.10 -m pip install torch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 --index-url https://download.pytorch.org/whl/cu124
+
+    # 安装 bpy
+    - python3.10 -m pip install bpy==4.0 --extra-index-url https://download.blender.org/pypi/
+
+    # 下载 RealESRGAN ckpt
+    - mkdir -p /root/.cache/hy3dpaint/ckpt && curl -L -o /root/.cache/hy3dpaint/ckpt/RealESRGAN_x4plus.pth \
+      https://github.com/xinntao/Real-ESRGAN/releases/download/v0.1.0/RealESRGAN_x4plus.pth
+
+    # 下载 u2net
+    - mkdir -p /root/.u2net/ && curl -L -o /root/.u2net/u2net.onnx \
+      https://github.com/danielgatis/rembg/releases/download/v0.0.0/u2net.onnx
+      
 predict: "predict.py:Predictor"
