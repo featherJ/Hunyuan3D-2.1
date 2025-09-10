@@ -22,7 +22,8 @@ from cog import BasePredictor, BaseModel, Input, Path
 
 from hy3dshape import FaceReducer, FloaterRemover, DegenerateFaceRemover, Hunyuan3DDiTFlowMatchingPipeline
 from hy3dshape.pipelines import export_to_trimesh
-from hy3dshape.rembg import BackgroundRemover
+# from hy3dshape.rembg import BackgroundRemover
+from hy3dshape.rmbg import RMBG
 from hy3dshape.utils import logger
 from hy3dpaint.textureGenPipeline import Hunyuan3DPaintPipeline, Hunyuan3DPaintConfig
 from hy3dpaint.convert_utils import create_glb_with_pbr_materials
@@ -58,7 +59,8 @@ class Predictor(BasePredictor):
             self.floater_remove_worker = FloaterRemover()
             self.degenerate_face_remove_worker = DegenerateFaceRemover()
             self.face_reduce_worker = FaceReducer()
-            self.rmbg_worker = BackgroundRemover()
+            # self.rmbg_worker = BackgroundRemover()
+            self.rmbg_worker = RMBG()
             
             duration = time.time() - start
             logger.info(f"Setup took: {duration:.2f}s")
@@ -147,7 +149,7 @@ class Predictor(BasePredictor):
 
         if image is not None:
             input_image = Image.open(str(image))
-            if remove_background or input_image.mode == "RGB":
+            if remove_background:
                 input_image = self.rmbg_worker(input_image.convert('RGB'))
                 self._cleanup_gpu_memory()
         else:
