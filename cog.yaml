@@ -31,5 +31,6 @@ build:
 
     # 预下载 hunyuan3d 2.1 模型
     - python3.10 -c "from huggingface_hub import snapshot_download; snapshot_download(repo_id='andreca/hunyuan3d-2.1xet', allow_patterns=['hunyuan3d-paintpbr-v2-1/*'])"
+    - python3.10 -c "from huggingface_hub import snapshot_download; snapshot_download(repo_id='andreca/hunyuan3d-2.1xet', allow_patterns=['hunyuan3d-dit-v2-1/*'], local_dir='~/.cache/hy3dgen/andreca/hunyuan3d-2.1xet')"
 
 predict: "predict.py:Predictor" 
