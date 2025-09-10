@@ -57,12 +57,6 @@ cupy-cuda12x==13.4.1
 # Blender
 # bpy==4.0 靠run来安装。。
 
-# 为了引入阿里的移除背景开源模型
-modelscope
-kornia>=0.7.0
-torchaudio==2.5.1
-pillow>=9.0.0
-
 # ONNX Runtime
 onnxruntime==1.16.3
 torchmetrics==1.6.0
