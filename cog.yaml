@@ -14,8 +14,8 @@ build:
     # 安装 PyTorch + CUDA
     - python3.10 -m pip install torch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 --index-url https://download.pytorch.org/whl/cu124
 
-    # 安装 modelscope 及 huggingface
-    - python3.10 -m pip install modelscope kornia>=0.7.0 pillow>=9.0.0 huggingface_hub
+    # 安装 modelscope
+    - python3.10 -m pip install modelscope kornia>=0.7.0 pillow>=9.0.0
 
     # 安装 bpy
     - python3.10 -m pip install bpy==4.0 --extra-index-url https://download.blender.org/pypi/
@@ -28,9 +28,5 @@ build:
 
     # RMBG-2.0 模型缓存
     - python3.10 -c "from modelscope import AutoModelForImageSegmentation; AutoModelForImageSegmentation.from_pretrained('AI-ModelScope/RMBG-2.0', trust_remote_code=True)"
-
-    # 预下载 hunyuan3d 2.1 模型
-    - python3.10 -c "from huggingface_hub import snapshot_download; snapshot_download(repo_id='andreca/hunyuan3d-2.1xet', allow_patterns=['hunyuan3d-paintpbr-v2-1/*'])"
-    - python3.10 -c "from huggingface_hub import snapshot_download; snapshot_download(repo_id='andreca/hunyuan3d-2.1xet', allow_patterns=['hunyuan3d-dit-v2-1/*'], local_dir='~/.cache/hy3dgen/andreca/hunyuan3d-2.1xet')"
 
 predict: "predict.py:Predictor" 
